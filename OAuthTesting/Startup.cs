@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using OAuthTesting.DBContext;
 
 namespace OAuthTesting
 {
@@ -28,6 +30,7 @@ namespace OAuthTesting
                 configuration.RootPath = "ClientApp/dist";
             });
             services.AddSingleton<IConfiguration>(Configuration);
+            services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetValue<string>("ConnectionString:default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
