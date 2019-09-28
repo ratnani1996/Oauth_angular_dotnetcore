@@ -29,6 +29,16 @@ namespace OAuthTesting
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             services.AddSingleton<IConfiguration>(Configuration);
             services.AddDbContext<UserContext>(options => options.UseSqlServer(Configuration.GetValue<string>("ConnectionString:default")));
         }
@@ -50,7 +60,7 @@ namespace OAuthTesting
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
-
+            app.UseCors("CorsPolicy");
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

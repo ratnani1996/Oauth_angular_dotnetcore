@@ -11,13 +11,15 @@ namespace OAuthTesting.Model
     {
         [Key]
         public Guid Id { get; set; }
-        [Column(TypeName = "varchar(30)")][MaxLength(30)][Required]
+        [Column(TypeName = "varchar(30)")][MaxLength(30)]
         public string Name { get; set; }
         [Column(TypeName = "varchar(20)")][MaxLength(20)][Required]
         public string Username { get; set; }
-        [Column(TypeName = "varchar(20)")][MaxLength(20)][Required]
+        
+        public byte[] PasswordHash { get; set; }
+
+        public byte[] PasswordSalt { get; set; }
+
         public string Password { get; set; }
-        [Column(TypeName = "bit")]
-        public bool IsVerified { get; set; }
     }
 }

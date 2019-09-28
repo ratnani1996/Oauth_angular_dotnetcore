@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OAuthTesting.DBContext;
 
 namespace OAuthTesting.Migrations
 {
     [DbContext(typeof(UserContext))]
-    partial class UserContextModelSnapshot : ModelSnapshot
+    [Migration("20190926123916_addedPasswordSaltToUsers")]
+    partial class addedPasswordSaltToUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,6 +27,7 @@ namespace OAuthTesting.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("varchar(30)")
                         .HasMaxLength(30);
 
